@@ -1,0 +1,12 @@
+dev:
+  extracts:
+    orders:
+      tableName: SALES_SRC_DEV.ORDERS
+    customers:
+      tableName: SALES_SRC_DEV.CUSTOMERS
+prod:
+  extracts:
+    orders:
+      tableName: SALES_SRC_PRD.ORDERS
+    customers:
+      tableName: SALES_SRC_PRD.CUSTOMERS

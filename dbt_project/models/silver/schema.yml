@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: f_sales
+    description: Daily sales by city, region and customer segment.
+    columns:
+      - name: sale_dt
+        description: Order date.
+      - name: city_nm
+        description: City of the order, upper case.
+      - name: region_cd
+        description: Sales region code.
+      - name: customer_segment
+        description: Segment of the customer who placed the order.
+      - name: order_cnt
+        description: Number of orders.
+      - name: net_revenue_amt
+        description: Revenue for the day.

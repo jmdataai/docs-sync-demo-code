@@ -1,0 +1,16 @@
+{
+  "orders": {
+    "name": "Orders",
+    "type": "jdbc",
+    "inputTablePath": "SALES_SRC.ORDERS",
+    "outputTablePath": "/mnt/bronze/orders_raw/",
+    "sqlPath": "sql/orders.sql"
+  },
+  "customers": {
+    "name": "Customers",
+    "type": "jdbc",
+    "inputTablePath": "SALES_SRC.CUSTOMERS",
+    "outputTablePath": "/mnt/bronze/customers_raw/",
+    "sqlPath": "sql/customers.sql"
+  }
+}

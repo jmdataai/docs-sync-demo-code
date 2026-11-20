@@ -1,0 +1,32 @@
+# Tells the docs repo that something changed, after every push to develop.
+# Same file as the client package; only the runner and the guard below differ.
+#
+# It sends no code and no data, only the repo name and the commit.
+#
+# Settings in this repo (Settings > Secrets and variables > Actions):
+#   Variables tab:  DOCS_REPO = jmdataai/docs-sync-demo-docs
+#   Secrets tab:    DOCS_SYNC_DISPATCH_TOKEN = token allowed to start workflows in the docs repo
+
+name: Notify docs repo
+
+on:
+  push:
+    branches: [develop]          # the branch the docs follow
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ vars.DOCS_REPO != '' }}   # skip quietly until the settings are added
+    steps:
+      - name: Ask the docs repo to sync
+        env:
+          TOKEN: ${{ secrets.DOCS_SYNC_DISPATCH_TOKEN }}
+          DOCS_REPO: ${{ vars.DOCS_REPO }}
+        run: |
+          curl -sS --fail-with-body -X POST \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$DOCS_REPO/dispatches" \
+            -d "{\"event_type\":\"source-deployed\",\"client_payload\":{\"repo\":\"$GITHUB_REPOSITORY\",\"sha\":\"$GITHUB_SHA\"}}"
+          echo "Sent: $GITHUB_REPOSITORY @ $GITHUB_SHA -> $DOCS_REPO"

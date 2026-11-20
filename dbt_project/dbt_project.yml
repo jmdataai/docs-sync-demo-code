@@ -1,0 +1,12 @@
+name: sales_insights
+version: "1.0.0"
+config-version: 2
+profile: sales_insights
+
+model-paths: ["models"]
+
+models:
+  sales_insights:
+    silver:
+      +materialized: table
+      +tags: ["silver", "sales"]

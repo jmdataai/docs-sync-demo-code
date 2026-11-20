@@ -15,4 +15,6 @@ models:
       - name: order_cnt
         description: Number of orders.
       - name: net_revenue_amt
-        description: Revenue for the day.
+        description: Revenue for the day, after discounts. Cancelled orders are left out.
+      - name: discount_amt
+        description: Discount given on the day's orders.
